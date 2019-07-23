@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+
+  db:
+    image: mariadb:10.1
+    user: ${UID}:${GID}
+    environment:
+      - MYSQL_DATABASE=app
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=pass
+    volumes:
+      - ./shared/db/mysql:/var/lib/mysql
+
+  adminer:
+    user: ${UID}:${GID}
+    image: adminer
+    ports:
+      - 8080:8080
