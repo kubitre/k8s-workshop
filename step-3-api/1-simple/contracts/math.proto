@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package math;
+
+option go_package = "math/contracts";
+
+service math {
+
+    rpc Sum (SumRequest) returns (Result) {}
+
+    rpc Fibonacci(FactorialRequest) returns (Result) {}
+
+}
+
+message SumRequest {
+    int32 a = 1;
+    int32 b = 2;
+}
+
+message FactorialRequest {
+    int32 n = 1;
+}
+
+message Result {
+    int32 result = 1;
+}
