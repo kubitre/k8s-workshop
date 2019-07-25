@@ -69,6 +69,7 @@ func (mathServer) Fibonacci(ctx context.Context, req *contracts.FactorialRequest
 }
 
 func runGrpcServer() error {
+	println("serving grpc at :3000")
 	listener, err := net.Listen("tcp", ":3000")
 	if err != nil {
 		return fmt.Errorf("failed to listen: %v", err)
@@ -94,6 +95,7 @@ func runHttpServer() error {
 	r := http.NewServeMux()
 	r.Handle("/", mux)
 
+	println("serving http at :3001")
 	if err := http.ListenAndServe(":3001", r); err != nil {
 		return fmt.Errorf("failed to serve http: %v", err)
 	}
