@@ -15,13 +15,13 @@
     
       package math;
     
-      option go_package = "math/contracts";
+      option go_package = "contracts";
     
       service math {
     
           rpc Sum (SumRequest) returns (Result) {}
     
-          rpc Fibonacci(FactorialRequest) returns (Result) {}
+          rpc Fibonacci(FibonacciRequest) returns (Result) {}
     
       }
     
@@ -30,7 +30,7 @@
           int32 b = 2;
       }
     
-      message FactorialRequest {
+      message FibonacciRequest {
           int32 n = 1;
       }
     
@@ -39,7 +39,7 @@
       }
 
       ```
-    - Run `docker run --rm -u $(id -u):$(id -g) -v $PWD/contracts:/contracts -w /contracts thethingsindustries/protoc --go_out=plugins=grpc:. -I. ./*.proto`
+    - Run `docker run --rm -u $(id -u):$(id -g) -v $PWD/contracts:/contracts -w /contracts thethingsindustries/protoc "--go_out=plugins=grpc:. -I. ./*.proto"`
     - Review generated `math.pb.go`;
     
 3. Then we can use it in our generated http server:

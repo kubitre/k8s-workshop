@@ -12,7 +12,7 @@ service math {
         option (google.api.http).get = "/v1alpha/math/sum";
     }
 
-    rpc Fibonacci (FactorialRequest) returns (Result) {
+    rpc Fibonacci (FibonacciRequest) returns (Result) {
         option (google.api.http).get = "/v1alpha/math/fibonacci";
 
     }
@@ -24,7 +24,7 @@ message SumRequest {
     int32 b = 2;
 }
 
-message FactorialRequest {
+message FibonacciRequest {
     int32 n = 1;
 }
 

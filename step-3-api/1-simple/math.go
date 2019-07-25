@@ -60,7 +60,7 @@ func (mathServer) Sum(ctx context.Context, req *contracts.SumRequest) (*contract
 	return &res, nil
 }
 
-func (mathServer) Fibonacci(ctx context.Context, req *contracts.FactorialRequest) (*contracts.Result, error) {
+func (mathServer) Fibonacci(ctx context.Context, req *contracts.FibonacciRequest) (*contracts.Result, error) {
 	res := contracts.Result{}
 	res.Result = int32(fibonacci(int(req.GetN())))
 	return &res, nil

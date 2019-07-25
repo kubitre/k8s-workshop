@@ -8,8 +8,9 @@
         - `alias gontainer="docker run -it --net=host -u $(id -u):$(id -g) -e XDG_CACHE_HOME=/tmp/cache -v $GOPATH/.cache:/tmp/cache -v $GOPATH:/go -w /go/$(realpath --relative-to=$GOPATH $PWD) golang:1.12.7"`;
         - `alias go="gontainer go"`;
         - `go version`;
+        // @todo issue with gopath
 2. Lets create a new hello-world project:
-    - `mkdir -p ~/go/src/math && cd ~/go/src/math`;
+    - `mkdir -p $GOPATH/src/math && cd $GOPATH/src/math`;
     - Create a `main.go` with content: 
     ```go
     package main
