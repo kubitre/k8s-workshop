@@ -94,6 +94,7 @@
       	return nil
       }
       ```
+    - `go run main.go server & go run main.go client`
       
 4. Lets add grpc gateway to our server to be accessible via http1:
     - To `math.proto`:
@@ -106,7 +107,7 @@
           option (google.api.http).get = "/v1alpha/math/fibonacci";
       }
       ```
-    - Run `docker run --rm -u $(id -u):$(id -g) -v $PWD:/contracts -w /contracts thethingsindustries/protoc --swagger_out=logtostderr=true:. --grpc-gateway_out=logtostderr=true:. -I. ./*.proto`
+    - Run `docker run --rm -u $(id -u):$(id -g) -v $PWD/contracts:/contracts -w /contracts thethingsindustries/protoc --swagger_out=logtostderr=true:. --grpc-gateway_out=logtostderr=true:. -I. ./*.proto`
     - So we got some code for gateway, lets include it to our server:
       ```go
       	mux := runtime.NewServeMux()
