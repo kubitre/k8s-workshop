@@ -5,8 +5,8 @@
     - Using docker: 
         - `mkdir -p ~/go/.cache`;
         - `export GOPATH=~/go`;
-        - `alias gontainer="docker run -it --net=host -u $(id -u):$(id -g) -e XDG_CACHE_HOME=/tmp/cache -v $GOPATH/.cache:/tmp/cache -v ~/go:/go -w /go/$(realpath --relative-to=$GOPATH $PWD) golang:1.12.7"`;
-        - `alias go="gontainer go`;
+        - `alias gontainer="docker run -it --net=host -u $(id -u):$(id -g) -e XDG_CACHE_HOME=/tmp/cache -v $GOPATH/.cache:/tmp/cache -v $GOPATH:/go -w /go/$(realpath --relative-to=$GOPATH $PWD) golang:1.12.7"`;
+        - `alias go="gontainer go"`;
         - `go version`;
 2. Lets create a new hello-world project:
     - `mkdir -p ~/go/src/math && cd ~/go/src/math`;

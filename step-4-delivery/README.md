@@ -20,7 +20,6 @@
      EXPOSE 3000
      EXPOSE 3001
      ENTRYPOINT ./math
-
      ```
    - We can build it: `docker build -t app_test .`
    - Then we can check it: `docker run -p 3000:3000 -p3001:3001 app_test server`

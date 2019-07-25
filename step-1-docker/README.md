@@ -12,7 +12,7 @@
 
 ## Case A: docker for cli utilities
 1. Lets imagine that we have an SQL instance: 
-    - Register new account at [remotemysql.com](remotemysql.com);
+    - Register new account at [https://remotemysql.com](https://remotemysql.com);
     - Create free database, i.e:
     ```
     You have successfully created a new database. The details are below.
@@ -22,20 +22,22 @@
     Server: remotemysql.com
     Port: 3306
     ```
+        - Click "Database" -> "Create";
 
 2. Now we need to manage our database. We may want to i.e. install adminer. But we need to install php, download some code, run a web server.. Other way we can use docker to avoid extra installations:
-    - Run `docker run --name adminer --rm -p 8080:8080 -d adminer:4.7.2-standalone`
-    - Navigate to `127.0.0.1`, enter credentials from step 1;
+    - Run `docker run --name myadminer --rm -p 3000:8080 -d adminer:4.7.2-standalone`
+    - Navigate to `127.0.0.1:3000`, enter credentials from step 1;
     - Congrats, now you can manage your remote sql without extra installations;
-    - Run `docker stop adminer` to stop & cleanup used adminer.
+    - Run `docker stop myadminer` to stop & cleanup used adminer.
 
 ## Case B: Our docker network
 1. Lets imagine that we want to build a stateful application, some php code and some database. To simplify support we may want to use docker:
     - Lets prepare a project directory, like `mkdir -p ~/projects/k8s-workshop/step-1 && cd ~/projects/k8s-workshop/step-1`;
     - Then lets prepare some project structure:
-        - `mkdir -r shared/db` - create a directory for mounted data to keep some state from docker;
+        - `mkdir -p shared/db` - create a directory for mounted data to keep some state from docker;
     - Firstly, we need a database; 
         - Run `docker run --name db --rm -e MYSQL_DATABASE=app -e MYSQL_ROOT_PASSWORD=root -e MYSQL_USER=user -e MYSQL_PASSWORD=pass -v $PWD/shared/db/mysql:/var/lib/mysql -u $(id -u):$(id -g) -d mariadb:10.1`;
+        - @todo: ^^ doesnt work
     - Then, we need an application, adminer is still ok:
         - Run `docker run --name adminer --rm -p 8080:8080 -d adminer:4.7.2-standalone`;
     - Then we need to make a "bridge" between them. We will use docker network:
@@ -48,7 +50,7 @@
     - You can run you application again and make sure that your is in safe. 
 
 2. But its too verbose way. To ease your work you can use `docker-compose`;
-    - Lets declare our services from point 1 using docker compose:
+    - Lets declare our services as `docker-compose.yml` from point 1 using docker compose:
     ```yaml
     version: "3"
     services:
@@ -69,7 +71,7 @@
           - 8080:8080
     ```
     - To automate `${UID}:${GID}` bindings we need to create `.env`:
-        - Run `echo "$(id -u):$(id -g)" > .env`;
+        - Run `echo -e "UID=$(id -u)\nGID=$(id -g)" > .env`;
     - Now we can raise the same applications set: `docker-compose up -d`;
         - (you can check that its working, `127.0.0.1:8080`, etc.);
     - You can call `docker-compose down` to shutdown everything;
