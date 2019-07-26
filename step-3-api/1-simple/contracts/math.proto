@@ -8,7 +8,7 @@ service math {
 
     rpc Sum (SumRequest) returns (Result) {}
 
-    rpc Fibonacci(FactorialRequest) returns (Result) {}
+    rpc Fibonacci(FibonacciRequest) returns (Result) {}
 
 }
 
@@ -17,7 +17,7 @@ message SumRequest {
     int32 b = 2;
 }
 
-message FactorialRequest {
+message FibonacciRequest {
     int32 n = 1;
 }
 

@@ -74,7 +74,7 @@
       	return &res, nil
       }
       
-      func (mathServer) Fibonacci(ctx context.Context, req *contracts.FactorialRequest) (*contracts.Result, error) {
+      func (mathServer) Fibonacci(ctx context.Context, req *contracts.FibonacciRequest) (*contracts.Result, error) {
       	res := contracts.Result{}
       	res.Result = int32(fibonacci(int(req.GetN())))
       	return &res, nil
@@ -103,7 +103,7 @@
           option (google.api.http).get = "/v1alpha/math/sum";
       }
       
-      rpc Fibonacci (FactorialRequest) returns (Result) {
+      rpc Fibonacci (FibonacciRequest) returns (Result) {
           option (google.api.http).get = "/v1alpha/math/fibonacci";
       }
       ```

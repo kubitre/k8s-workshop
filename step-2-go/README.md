@@ -1,16 +1,16 @@
-# Step 3: Golang
+# Step 2: Golang
 
 1. Prepare golang environment:
     - Locally (https://golang.org/doc/install);
     - Using docker: 
         - `mkdir -p ~/go/.cache`;
         - `export GOPATH=~/go`;
-        - `alias gontainer="docker run -it --net=host -u $(id -u):$(id -g) -e XDG_CACHE_HOME=/tmp/cache -v $GOPATH/.cache:/tmp/cache -v $GOPATH:/go -w /go/$(realpath --relative-to=$GOPATH $PWD) golang:1.12.7"`;
+        - `alias gontainer='docker run -it --net=host -u $(id -u):$(id -g) -e XDG_CACHE_HOME=/tmp/cache -v $GOPATH/.cache:/tmp/cache -v $GOPATH:/go -v $PWD:/app -w /app golang:1.12.7'`;
         - `alias go="gontainer go"`;
         - `go version`;
-        // @todo issue with gopath
 2. Lets create a new hello-world project:
-    - `mkdir -p $GOPATH/src/math && cd $GOPATH/src/math`;
+    - `mkdir -p ~/projects/k8s-workshop/math && cd ~/projects/k8s-workshop/math`;
+    - `go mod init math`
     - Create a `main.go` with content: 
     ```go
     package main
@@ -134,4 +134,4 @@
         // ...
     }()
     ```
-// @todo: use `-v $PWD:$PWD -w $PWD` in go docker alias.
+    
