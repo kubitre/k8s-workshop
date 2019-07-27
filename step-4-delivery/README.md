@@ -32,7 +32,8 @@
    RUN apk add git
    RUN go mod download
    COPY . .
-   RUN go build -o math
+   RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o math main.go
+   RUN chmod +x math
    
    FROM scratch
    WORKDIR /app
