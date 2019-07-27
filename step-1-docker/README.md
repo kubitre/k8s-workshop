@@ -34,10 +34,9 @@
 1. Lets imagine that we want to build a stateful application, some php code and some database. To simplify support we may want to use docker:
     - Lets prepare a project directory, like `mkdir -p ~/projects/k8s-workshop/step-1 && cd ~/projects/k8s-workshop/step-1`;
     - Then lets prepare some project structure:
-        - `mkdir -p shared/db` - create a directory for mounted data to keep some state from docker;
+        - `mkdir -p shared/db/mysql` - create a directory for mounted data to keep some state from docker;
     - Firstly, we need a database; 
         - Run `docker run --name db --rm -e MYSQL_DATABASE=app -e MYSQL_ROOT_PASSWORD=root -e MYSQL_USER=user -e MYSQL_PASSWORD=pass -v $PWD/shared/db/mysql:/var/lib/mysql -u $(id -u):$(id -g) -d mariadb:10.1`;
-        - @todo: ^^ doesnt work
     - Then, we need an application, adminer is still ok:
         - Run `docker run --name adminer --rm -p 8080:8080 -d adminer:4.7.2-standalone`;
     - Then we need to make a "bridge" between them. We will use docker network:

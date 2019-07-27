@@ -2,10 +2,16 @@
 
 1. Prepare golang environment:
     - Locally (https://golang.org/doc/install);
-    - Using docker: 
+    - Using docker for linux: 
         - `mkdir -p ~/go/.cache`;
         - `export GOPATH=~/go`;
         - `alias gontainer='docker run -it --net=host -u $(id -u):$(id -g) -e XDG_CACHE_HOME=/tmp/cache -v $GOPATH/.cache:/tmp/cache -v $GOPATH:/go -v $PWD:/app -w /app golang:1.12.7'`;
+        - `alias go="gontainer go"`;
+        - `go version`;
+    - Using docker for mac : 
+        - `mkdir -p ~/go/.cache`;
+        - `export GOPATH=~/go`;
+        - `alias gontainer='docker run -it -p 3000:3000 -p 3001:3001 -u $(id -u):$(id -g) -e XDG_CACHE_HOME=/tmp/cache -v $GOPATH/.cache:/tmp/cache -v $GOPATH:/go -v $PWD:/app -w /app golang:1.12.7'`;
         - `alias go="gontainer go"`;
         - `go version`;
 2. Lets create a new hello-world project:
